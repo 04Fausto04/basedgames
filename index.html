@@ -1,27 +1,196 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<title>Based Games</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Videojuegos Retro</title>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-	<meta="description" content=" juegos web completamente gratis">
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
 
+        body {
+            background-color: #121212; /* Azul oscuro */
+            color: #E0E0E0; /* Color claro para el texto */
+            font-family: 'Press Start 2P', cursive; /* Fuente retro */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header, footer {
+            background-color: #282828; /* Azul más claro */
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #3F51B5; /* Azul para el borde */
+        }
+
+        header h1, footer p {
+            margin: 0;
+        }
+
+        section {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .ad {
+            background-color: #3F51B5; /* Azul para los anuncios */
+            margin: 10px auto;
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #000; /* Sombra para efecto retro */
+            transition: transform 0.3s;
+            animation: fadeIn 1s ease-in-out;
+            display: none; /* Ocultar todos los anuncios inicialmente */
+        }
+
+        .ad.active {
+            display: block; /* Mostrar el anuncio activo */
+        }
+
+        .ad:hover {
+            animation: pulse 0.6s infinite;
+        }
+
+        .ad img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background-color: #282828;
+            border: none;
+            color: #E0E0E0;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .carousel-button:hover {
+            background-color: #3F51B5;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .ad {
+                width: 150px;
+                padding: 15px;
+            }
+
+            header, footer {
+                padding: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ad {
+                width: 100%;
+                margin: 5px 0;
+                padding: 10px;
+            }
+
+            section {
+                padding: 10px;
+            }
+
+            header, footer {
+                padding: 10px 0;
+            }
+
+            header h1, footer p {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-<body bgcolor="black" text="white">
-<meta	
-	
-	
-	
-	
-	
-	<center><h1>
-	BASED GAMES
-	</h1></center>
-<center>	<p>¡¡¡JUEGOS ONLINE GRATIS!!!</center>
+<body>
+    <header>
+        <h1>Página de Videojuegos Retro</h1>
+    </header>
+    <section>
+        <div class="ad active">
+            <img src="https://via.placeholder.com/150" alt="Anuncio 1">
+            <p>Juego Retro 1</p>
+        </div>
+        <div class="ad">
+            <img src="https://via.placeholder.com/150" alt="Anuncio 2">
+            <p>Juego Retro 2</p>
+        </div>
+        <div class="ad">
+            <img src="https://via.placeholder.com/150" alt="Anuncio 3">
+            <p>Juego Retro 3</p>
+        </div>
+        <!-- Agregar más anuncios según sea necesario -->
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prevBtn">&lt; Anterior</button>
+            <button class="carousel-button" id="nextBtn">Siguiente &gt;</button>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Página de Videojuegos Retro</p>
+    </footer>
 
+    <script>
+        let currentAdIndex = 0;
+        const ads = document.querySelectorAll('.ad');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
+        function showAd(index) {
+            ads.forEach((ad, i) => {
+                ad.classList.remove('active');
+                if (i === index) {
+                    ad.classList.add('active');
+                }
+            });
+        }
 
+        prevBtn.addEventListener('click', () => {
+            currentAdIndex = (currentAdIndex > 0) ? currentAdIndex - 1 : ads.length - 1;
+            showAd(currentAdIndex);
+        });
 
-
-
+        nextBtn.addEventListener('click', () => {
+            currentAdIndex = (currentAdIndex < ads.length - 1) ? currentAdIndex + 1 : 0;
+            showAd(currentAdIndex);
+        });
+    </script>
 </body>
-
 </html>
